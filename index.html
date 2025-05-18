@@ -172,7 +172,7 @@
     <h2>Visualize Smruti</h2>
     <img id="smrutiImage" class="image-display" src="https://www.baps.org/Data/Sites/1/Media/OtherImages/11872/Webimages/Houston_GuruBhaktiDin_18.jpg" alt="Smruti Image" />
     <br />
-    <button onclick="changeSmrutiImage()">Generate New Image</button>
+    <button onclick="changeSmrutiImage()">Generate New Smruti</button>
     <div class="reflection-questions" id="smrutiQuestions">
       <p><strong>Reflection Questions:</strong></p>
     </div>
@@ -200,7 +200,7 @@
   <section>
     <h2>Shruti Smruti</h2>
     <p><em id="shrutiQuote">"Ā smṛuti e bhagwan ne jīv sathe jodnārī che." – Vachanamrut Gadhada II-3</em></p>
-    <button onclick="generateNewShrutiQuote()">Generate New Quote</button>
+    <button onclick="generateNewShrutiQuote()">Generate New Reference</button>
     <canvas id="canvas2" width="400" height="300"></canvas>
     <div class="reflection-questions" id="shrutiQuestions"></div>
     <button onclick="generateQuestions('shrutiQuestions')">Generate Reflection Questions</button>
@@ -208,7 +208,7 @@
 
   <!-- Section 4 -->
   <section>
-    <h2>Smaruti Words</h2>
+    <h2>Smruti Words</h2>
     <p><strong>Gujarati Word: </strong><span id="gujaratiWord">પ્રેમ</span></p>
     <button onclick="generateNewGujaratiWord()">Generate New Word</button>
     <canvas id="canvas3" width="400" height="300"></canvas>
@@ -293,13 +293,13 @@
         const number = i.toString().padStart(3, '0');
         smrutiImages.push(`https://www.baps.org/Data/Sites/1/Media/GalleryImages/33176/WebImages/2025_05_03_${number}_Kanad.jpg`);
     }
-    smrutImages.push('https://www.baps.org/Data/Sites/1/Media/GalleryImages/32669/WebImages/2025_03_01_001_Melbourne.jpg')
-    const smrutImages = [];
+    smrutiImages.push('https://www.baps.org/Data/Sites/1/Media/GalleryImages/32669/WebImages/2025_03_01_001_Melbourne.jpg')
+  
     const baseURL = 'https://www.baps.org/Data/Sites/1/Media/GalleryImages/32669/WebImages/2025_03_01_';
 
     for (let i = 1; i <= 125; i++) {
         const paddedNumber = String(i).padStart(3, '0');
-        smrutImages.push(`${baseURL}${paddedNumber}_Melbourne.jpg`);
+        smrutiImages.push(`${baseURL}${paddedNumber}_Melbourne.jpg`);
     }
 
 
