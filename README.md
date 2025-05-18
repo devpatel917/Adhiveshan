@@ -2,7 +2,7 @@
 
 # SmrutiPath - A Journey to Divine Remembrance
 
-**SmrutiPath** is a transformative web application designed to deepen your connection with the divine by bringing your spiritual memories, or **smrutis**, to life. It’s a way to relive cherished moments, reflect on divine experiences, and connect with the teachings of Bhagwan, Maharaj, and our gurus. This platform encourages you to personalize your spiritual journey through reflection, creativity, and deeper introspection.
+**SmrutiPath** is a transformative web application designed to deepen your connection with Bhagwan and the Satpurush by bringing your spiritual memories, or **smrutis**, to life. It’s a way to relive cherished moments, reflect on divine experiences, and connect with the teachings of Bhagwan, Maharaj, and our gurus. This platform encourages you to personalize your spiritual journey through reflection, creativity, and deeper introspection.
 
 ## 🌟 Why SmrutiPath?
 
