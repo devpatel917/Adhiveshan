@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmrutiPath: The Path of Divine Remembrance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(to bottom, #f4f0ec, #fdfbf8);
+    color: #4a2c2a;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+  header {
+    background: linear-gradient(135deg, #a2785c, #d6b89c);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 5px solid #c8a27c;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+  header p {
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+  section {
+    padding: 3rem 2rem;
+    border-bottom: 1px solid #e4dcd3;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 1rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(180, 150, 130, 0.1);
+  }
+  h2 {
+    color: #6a3e37;
+    border-left: 5px solid #a2785c;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .image-display {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 2px solid #d6b89c;
+    box-shadow: 0 4px 8px rgba(100, 80, 70, 0.2);
+  }
+  button {
+    background-color: #a16c5b;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1.2rem;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background-color: #8b574b;
+  }
+  .reflection-questions {
+    margin-top: 1.5rem;
+  }
+  .reflection-questions p {
+    margin: 0.5rem 0;
+    font-weight: bold;
+    color: #5e3e36;
+  }
+  .reflection-questions textarea {
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.6rem;
+    border: 1px solid #d3c5b7;
+    border-radius: 6px;
+    background-color: #fffdfb;
+    resize: vertical;
+  }
+  canvas {
+    border: 2px dashed #c6b2a4;
+    display: block;
+    margin-top: 1rem;
+    background-color: #fdfaf6;
+    border-radius: 8px;
+  }
+  em {
+    color: #784e3a;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 1rem;
+    font-style: italic;
+    background-color: #fcf9f5;
+    padding: 0.8rem;
+    border-left: 4px solid #c59d88;
+    border-radius: 4px;
+  }
+  section::after {
+    content: "✦";
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #c0a98c;
+    margin-top: 2rem;
+  }
+
+  .word-search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    transition: all 0.4s ease-in-out;
+}
+.word-search button {
+    background-color: #a16c5b;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    font-size: 1rem;
+}
+.word-search button:hover {
+    background-color: #8b574b;
+    transform: scale(1.05);
+}
+.selected-image {
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #d6b89c;
+    box-shadow: 0 4px 8px rgba(100, 80, 70, 0.2);
+    transition: opacity 0.5s ease-in-out;
+}
+.regenerate-button {
+    background-color: #784e3a;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background 0.3s, transform 0.3s;
+}
+.regenerate-button:hover {
+    background-color: #5f3b2a;
+    transform: scale(1.05);
+}
+
+</style>
+
+</head>
+<body>
+  <header>
+    <h1>SmrutiPath: The Path of Divine Remembrance</h1>
+    <p>Connecting through remembrance of Bhagwan, Guru, and Satsang</p>
+  </header>
+
+  <!-- Section 1 -->
+  <section>
+    <h2>Visualize Smruti</h2>
+    <img id="smrutiImage" class="image-display" src="https://www.baps.org/Data/Sites/1/Media/OtherImages/11872/Webimages/Houston_GuruBhaktiDin_18.jpg" alt="Smruti Image" />
+    <br />
+    <button onclick="changeSmrutiImage()">Generate New Smruti</button>
+    <div class="reflection-questions" id="smrutiQuestions">
+      <p><strong>Reflection Questions:</strong></p>
+    </div>
+    <button onclick="generateQuestions('smrutiQuestions')">Generate New Questions</button>
+  </section>
+
+  <section>
+    <h2>Divine Connections</h2>
+    <div class="word-search" id="wordSearchContainer"></div>
+    <button class="regenerate-button" onclick="generateWordSearch()">Regenerate Words</button>
+    <img id="selectedImage" class="selected-image" alt="Selected Image" style="display: none;" />
+  </section>
+
+  <!-- Section 2 -->
+  <section>
+    <h2>Read & Reflect</h2>
+    <p><em id="prasangText">Once, Pramukh Swami Maharaj stayed up all night writing letters despite being tired – out of his love and care for devotees.</em></p>
+    <button onclick="changePrasang()">Generate New Prasang</button>
+    <canvas id="canvas1" width="400" height="300"></canvas>
+    <div class="reflection-questions" id="prasangQuestions"></div>
+    <button onclick="generateQuestions('prasangQuestions')">Generate Reflection Questions</button>
+  </section>
+
+  <!-- Section 3 -->
+  <section>
+    <h2>Shruti Smruti</h2>
+    <p><em id="shrutiQuote">"Ā smṛuti e bhagwan ne jīv sathe jodnārī che." – Vachanamrut Gadhada II-3</em></p>
+    <button onclick="generateNewShrutiQuote()">Generate New Reference</button>
+    <canvas id="canvas2" width="400" height="300"></canvas>
+    <div class="reflection-questions" id="shrutiQuestions"></div>
+    <button onclick="generateQuestions('shrutiQuestions')">Generate Reflection Questions</button>
+  </section>
+
+  <!-- Section 4 -->
+  <section>
+    <h2>Smruti Words</h2>
+    <p><strong>Gujarati Word: </strong><span id="gujaratiWord">પ્રેમ</span></p>
+    <button onclick="generateNewGujaratiWord()">Generate New Word</button>
+    <canvas id="canvas3" width="400" height="300"></canvas>
+    <div class="reflection-questions" id="wordQuestions"></div>
+    <button onclick="generateQuestions('wordQuestions')">Generate Reflection Questions</button>
+  </section>
+
+  
+
+  <script>
+    const shrutiQuotes = [
+      "One who has surrendered himself to God never suffers from anxiety. – Vachanamrut Gadhada I-60",
+      "A person who seeks the refuge of God becomes fearless. – Vachanamrut Gadhada II-13",
+      "Faith in God removes all worries and fears. – Vachanamrut Gadhada I-62",
+      "The greatest happiness is in remembering God constantly. – Vachanamrut Loya 1",
+      "If one has firm faith in God, all fears are removed. – Vachanamrut Gadhada I-62",
+      "One who remembers God always remains fearless. – Vachanamrut Gadhada I-11",
+      "Pure faith in God brings peace and happiness. – Vachanamrut Gadhada I-28",
+      "To keep one's mind constantly engaged in God is the highest form of devotion. – Vachanamrut Gadhada I-28",
+      "One who remains loyal to God achieves true happiness. – Vachanamrut Gadhada I-63",
+      "Remembering God is the only true refuge. – Vachanamrut Gadhada II-9",
+      "Bhakti brings peace and divine strength. – Satsang Diksha 140",
+      "Only those who have faith in God remain eternally fearless. – Satsang Diksha 201",
+      "God resides in the hearts of those who remember Him. – Satsang Diksha 136",
+      "One who has firm refuge in God experiences divine bliss. – Satsang Diksha 185",
+      "Devotion is the purest connection to the divine. – Satsang Diksha 90",
+      "To live a life of service is to live a life of divine purpose. – Satsang Diksha 98",
+      "The true devotee sees God in all and all in God. – Vachanamrut Gadhada I-12",
+      "God's love is the ultimate strength. – Vachanamrut Gadhada I-56",
+      "To serve others is to serve God. – Vachanamrut Gadhada II-28",
+      "One who loves God with true faith is never alone. – Satsang Diksha 210",
+      "With each breath, remember the divine. – Vachanamrut Gadhada I-3", 
+      "One who has performed the prescribed atonement should no longer be seen as a sinner. Holding onto their past and continuing to judge them makes us the real sinners. – Vachanamrut Gadhada I-10",
+    "Profound love for the Enlightened Sadhu is the only way of realizing the Atman and the only way of realizing Parmatman. – Vachanamrut Gadhada II-28",
+    "A person who has joined the Satsang and introspects while contemplating upon the glory of God sees his own Self as extremely pure and resplendent. – Vachanamrut Gadhada I-20",
+    "One who possesses perfect vairagya, absolute swadharma, and deep attachment towards God and His brahmanised saint enjoys the bliss of God unhampered. – Vachanamrut Gadhada III-8",
+    "Covetousness, wealth, attachment to women, excessive love of taste, egoity, attachment to vicious persons and relations, these six evils would always bring misery. One who desires happiness should totally eradicate such vicious instincts. – Vachanamrut Gadhada III-38",
+
+    // New additions from Satsang Diksha
+    "For this reason, Parabrahman Swaminarayan himself manifested in this world and established this divine Satsang. – Satsang Diksha 6",
+    "Swaminarayan Bhagwan, the sovereign of Akshar, is the manifest form of Paramatma Parabrahman Purushottam Hari. – Satsang Diksha 96",
+    "He alone is forever our ishtadev worthy of supreme upāsanā. One should always offer singular devotion to him only. – Satsang Diksha 97",
+    "Bhagwan is eternally the all-doer, with form and supreme; he always remains manifest for the moksha of mumukshus. – Satsang Diksha 106",
+    "To grant moksha to the mumukshus, the compassionate Parabrahman Swaminarayan Bhagwan manifested on this earth out of sheer grace. – Satsang Diksha 297",
+    "One should take the refuge of satsang to rid oneself of flaws, acquire virtues and attain ultimate moksha. – Satsang Diksha 126",
+    "There is one god, one guru and one siddhānt, thus we are always united. – Satsang Diksha 100",
+      "One should not believe in worldly superstitions because Maharaj and Swami are the all-doer of this world. – Satsang Diksha 279"
+    ];
+
+
+    const gujaratiWords = [
+    // Existing words
+    "પ્રેમ", "ભગવાન", "આત્મા", "નમ્રતા", "પ્રસાદ", "કૃપા", "દયા", "અહંકાર", "મુક્તિ",
+    "પરમાર્થ", "શાંતિ", "ભક્તિ", "નિર્ભયતા", "ત્યાગ", "વિનમ્રતા", "નિશ્ચય",
+
+    // New additions
+    "સત્સંગ", "સંપ", "એકતા", "મહિમા", "પ્રાપ્તિ", "કરુણા", "ઉપાસના", "આજ્ઞા", "મરજી", "રાજીપો",
+    "ગુરુભક્તિ", "યોગીજી", "પ્રમુખસ્વામી", "મહંતસ્વામી", "સંત", "સાધુ", "સેવા", "અક્ષર", "પુરુષોત્તમ",
+    "અક્ષરધામ", "સંપ્રદાય", "અનુકંપા", "અહંશૂન્યતા", "વિનમ્રતા", "સદાચાર", "નિયમ", "ધર્મ", "અહિંસા", "અનાસક્તિ",
+    "અનુકૂળતા", "અનુશાસન", "અનુકરણ", "અનુભૂતિ", "અનુસંધાન", "અનુસંધાન", "અનુસંધાન", "અનુસંધાન", "અનુસંધાન", "અનુસંધાન"
+  ];
+
+    function generateNewShrutiQuote() {
+      const quoteEl = document.getElementById('shrutiQuote');
+      const randomQuote = shrutiQuotes[Math.floor(Math.random() * shrutiQuotes.length)];
+      quoteEl.innerText = randomQuote;
+    }
+
+    function generateNewGujaratiWord() {
+      const wordEl = document.getElementById('gujaratiWord');
+      const randomWord = gujaratiWords[Math.floor(Math.random() * gujaratiWords.length)];
+      wordEl.innerText = randomWord;
+    }
+    generateNewShrutiQuote();
+    generateNewGujaratiWord();
+
+    const smrutiImages = [
+      'https://www.baps.org/Data/Sites/1/Media/OtherImages/11872/Webimages/Houston_GuruBhaktiDin_18.jpg',
+      'https://www.baps.org/Data/Sites/1/Media/GalleryImages/33176/WebImages/2025_05_03_001_Kanad.jpg',
+    ];
+    for (let i = 1; i <= 42; i++) {
+        const number = i.toString().padStart(3, '0');
+        smrutiImages.push(`https://www.baps.org/Data/Sites/1/Media/GalleryImages/33176/WebImages/2025_05_03_${number}_Kanad.jpg`);
+    }
+    smrutiImages.push('https://www.baps.org/Data/Sites/1/Media/GalleryImages/32669/WebImages/2025_03_01_001_Melbourne.jpg')
+  
+    const baseURL = 'https://www.baps.org/Data/Sites/1/Media/GalleryImages/32669/WebImages/2025_03_01_';
+
+    for (let i = 1; i <= 125; i++) {
+        const paddedNumber = String(i).padStart(3, '0');
+        smrutiImages.push(`${baseURL}${paddedNumber}_Melbourne.jpg`);
+    }
+
+
+
+    function changeSmrutiImage() {
+      const img = document.getElementById('smrutiImage');
+      const index = Math.floor(Math.random() * smrutiImages.length);
+      img.src = smrutiImages[index];
+    }
+
+    const prasangs = [
+    // Previously shortened prasangs from your input
+    "Dr. Mangal Patel asked how Swamishri runs 500 mandirs. Swamishri replied, 'I do nothing. God and Guru do everything.'",
+    "Swamishri taught: 'Make the effort, but leave the result to God. Even failure is for your benefit.'",
+    "Swamishri explained, 'When you carry water on your head, it's heavy—but when you dive into water, you feel no weight. I live in God's refuge, so I feel no burden.'",
+    "When asked about ego, Swamishri said, 'Pain comes from possessiveness. Peace comes from surrendering to God and Guru.'",
+    "A boy asked how to control anger. Swamishri replied, 'Chant Swaminarayan and remember Maharaj—anger will dissolve.'",
+    "Swamishri told a boy, 'Anger never brings peace. Bhajan and chanting bring calm to you and others.'",
+    "On laziness, Swamishri said, 'You’re young. Laziness is your enemy. Do everything now, not later.'",
+    "Swamishri advised, 'Wake early, pray, study. If you are lazy now, you won’t succeed later.'",
+    "Swamishri asked a boy, 'Will you stay this pure when you grow up?' The boy promised to remain in Satsang.",
+    "Swamishri told him, 'If you keep Satsang, God will give you moksha.'",
+    "When asked about divine dreams, Swamishri said, 'Yes, realized souls can receive true divine inspiration.'",
+    "A reporter asked, 'Have you attained realization?' Swamishri humbly said, 'Yes, ever since I met God through my Guru.'",
+    "Asked how to reach heaven, Swamishri replied, 'Refuge in God, follow His commands, and stay near a true sadhu.'",
+    "Swamishri said, 'Meeting God through the Guru is the path to realization and liberation.'",
+    "To one seeking peace, Swamishri said, 'Live in surrender. Ego brings pain, humility brings peace.'",
+    "To overcome distress, Swamishri advised, 'Chant God's name. It purifies the heart and dissolves sorrow.'",
+    "A reporter asked tough questions. Swamishri answered each with calm, clarity, and humility.",
+    "Swamishri said, 'If you delay spiritual work, life will pass by. Do your bhajan today, not tomorrow.'",
+    "He once said, 'Even great work becomes light when done for God. Even small work becomes heavy with ego.'",
+    "Swamishri reminded, 'Stay anchored in Guru’s teachings—only then will life find direction and peace.'",
+
+    // Additional new prasangs
+    "Once, Swamishri skipped rest to write letters to devotees, saying, 'They are waiting for my reply with faith.'",
+    "Swamishri said, 'When we live for others, our life becomes light and joyful.'",
+    "He told a student, 'Respect your parents as God. Through them, you receive divine blessings.'",
+    "A youth asked about bad company. Swamishri replied, 'Avoid it like poison—it steals away God from your heart.'",
+    "Swamishri often said, 'Satsang is the shield that protects your soul from worldly attacks.'",
+    "Someone asked Swamishri how he remains so calm. He replied, 'Because I see God in every situation.'",
+    "Swamishri once said, 'The more you serve without ego, the more peace God gives you.'",
+    "He told a devotee, 'Your seva is seen by God, even if no one else sees it.'",
+    "To one doubting themselves, Swamishri said, 'God believes in you more than you believe in yourself.'",
+    "On forgiveness, he said, 'Forgive quickly. Holding on to hurt blocks God's love from flowing.'",
+    "When praised, Swamishri always pointed up and said, 'All credit goes to Maharaj and my Guru.'",
+    "Swamishri taught, 'Ego separates us from God. Humility brings us to His doorstep.'",
+    "He once consoled a grieving father, saying, 'Your child is with Maharaj now, in eternal peace.'",
+    "To a sad devotee, he smiled and said, 'Even sadness can become devotion if offered to God.'",
+    "Swamishri reminded, 'Never let one bad moment define your whole day. Remember God and move on.'", 
+     "Bhagwan Swaminarayan once stood barefoot on scorching ground to help a devotee in pain cross a field.",
+    "Gunatitanand Swami forgave a man who publicly insulted him, later inspiring the man to become a saint.",
+    "Shastriji Maharaj faced intense opposition but remained unwavering in building the first Akshar Purushottam Mandir.",
+    "Yogiji Maharaj washed dishes with joy, showing humility despite his position.",
+    "Pramukh Swami Maharaj visited earthquake-hit villages in Kutch, comforting victims personally.",
+    "Mahant Swami Maharaj silently served sick devotees during his early days as a sadhu.",
+    "Once, Bhagwan Swaminarayan took the illness of a devotee upon Himself to save him.",
+    "Gunatitanand Swami spent hours answering a child's simple question, valuing every soul.",
+    "Shastriji Maharaj walked for days to attend a single devotee's Vachanamrut session.",
+    "Yogiji Maharaj ate stale food happily so fresh food could be served to devotees.",
+    "Pramukh Swami Maharaj continued Vicharan despite high fever, saying, 'This is my seva to God’s devotees.'",
+    "Mahant Swami Maharaj waited in line like a regular devotee at a mandir in London, showing humility.",
+    "Bhagwan Swaminarayan helped carry water for villagers during a drought.",
+    "Gunatitanand Swami would sweep the mandir courtyard early in the morning while others slept.",
+    "Shastriji Maharaj calmly responded to an attacker with blessings instead of anger.",
+    "Yogiji Maharaj personally cooked for balaks at a shibir, laughing with them like a loving grandfather.",
+    "Pramukh Swami Maharaj personally remembered 500+ devotees' names and life stories.",
+    "Mahant Swami Maharaj once paused a grand sabha to ask a child if he had eaten.",
+    "Bhagwan Swaminarayan uplifted untouchables, giving them equal spiritual rights in society.",
+    "Yogiji Maharaj walked barefoot for hours in the heat just to visit a sick devotee."
+    ];
+
+
+    function changePrasang() {
+      const el = document.getElementById('prasangText');
+      const index = Math.floor(Math.random() * prasangs.length);
+      el.innerText = prasangs[index];
+    }
+
+    const reflectionPrompts = [
+      'What does this make you feel?',
+      'Where do you think this took place?',
+      'What moment in your life does this remind you of?',
+      'How does this connect you to God?',
+      'What do you learn from this image or word?',
+      'What divine quality is being revealed in this moment?',
+      'How does this image or quote change your perspective today?',
+      'What message is God or Guru silently giving you here?',
+      'If you were present in this scene, how would you feel?',
+      'How does this relate to your current spiritual journey?',
+      'What virtue is being taught or displayed here?',
+      'What does this awaken in your heart?',
+      'How would you describe God\'s love in this moment?',
+      'What lesson is hidden within this quote or image?',
+      'What action or change does this inspire in you?',
+      'What would your Guru expect you to take away from this?',
+      'What feeling of seva (selfless service) does this stir in you?',
+      'How can you apply this in your daily life?',
+      'What sacrifice is shown here, and how can you emulate it?',
+      'What does this teach you about surrender?',
+      'What is the Guru silently doing for you here?',
+      'If you could speak to God in this moment, what would you say?',
+      'How does this increase your faith?',
+      'What memory or prasang does this bring to your mind?',
+      'What does this reveal about the eternal bond between bhakta and Bhagwan?',
+      'How would your life look if you fully lived this message?',
+      'What does this teach you about patience and trust?',
+      'In what way do you see your true self in this image?',
+      'What quality of the Guru is magnified here?',
+      'If this image were a mirror, what would it reflect in you?',
+      'How would you express your gratitude for this moment?',
+      'What truth about life does this make you realize?',
+      'What spiritual strength can you draw from this?',
+      'How does this deepen your understanding of God\'s compassion?',
+      'What aspect of divine grace do you witness here?',
+      'What vow or resolution does this inspire in you?',
+      'If you were to live this message today, what would change?',
+      'How does this remind you of your purpose?',
+      'What does this show you about the value of satsang?',
+      'How does this moment reflect God\'s constant presence in your life?',
+      'What do you need to let go of to truly live this message?',
+      'What connection do you feel with the saints or devotees shown here?',
+      'What inner voice is awakened by this?',
+      'How does this fuel your desire for moksha or liberation?',
+      'If this image or message were your final moment, what peace would it give you?'
+    ];
+
+    function generateQuestions(containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '<p><strong>Reflection Questions:</strong></p>';
+      for (let i = 0; i < 3; i++) {
+        const q = reflectionPrompts[Math.floor(Math.random() * reflectionPrompts.length)];
+        container.innerHTML += `<p>${q}</p><textarea rows="3"></textarea>`;
+      }
+    }
+    const satsangWords = [
+  "Bhakti", "Mahima", "Yogiji", "Mahant", "Pramukh", "Nirmanipanu", "Nishtha", "Shraddha", "Samp",
+  "Seva", "Ekantik", "Sharan", "Swaminarayan", "Anand", "Atma", "Vivek", "Sadhu", "Sant", "Bhakta",
+  "Gnan", "Prem", "Satsang", "Divyata", "Dharma", "Moksha", "Prerna", "Karuna", "Samarpan", "Tyag",
+  "Agna", "Upasana", "Vairagya", "Tapasya", "Shravan", "Bhajan", "Shruti", "Shakti", "Ashirvad",
+  "Upkar", "Sankalp", "Satpurush", "Brahmavidya", "Vachanamrut", "Vartman", "Mantra", "Shanti",
+  "Smruti", "Bhav", "Pujya", "Adhyatma", "Kirtan", "Mangal", "Sanskar", "Jnana", "Sadbhav", "Utsav",
+  "Sanskruti", "Paropkar", "Sahajanand", "Daya", "Anugrah", "Samvedna", "Satsangi", "Sthirata",
+  "Nivedan", "Stuti", "Bhavna", "Charitra", "Anubhav", "Prarthana", "Kshama", "Shubhav", "Swabhav",
+  "Niyam", "Prapti", "Kalyan", "Vatsalya", "Prabhav", "Atmabodh", "Swadharma", "Aashirwad", "Jivan",
+  "Tap", "Tyagmurti", "Purnata", "Sukh", "Krupa", "Anushtan", "Bhool", "Parivar", "Parsad", "Mukti", 
+  "Niyam", "Atma", "Priti", "Prem", "Gnan", "Nisswad", "Nissneh", "Nirman", "Nirlobh", "Krupa", "Drashti", "Divya", "Samagam", 
+  "Rajipo", "Prapti", "Karuna", "Divyata", "Akshardham" 
+
+];;
+
+    function generateWordSearch() {
+      const container = document.getElementById('wordSearchContainer');
+      container.innerHTML = '';
+      const shuffledWords = [...satsangWords].sort(() => 0.5 - Math.random()).slice(0, 16);
+      shuffledWords.forEach(word => {
+        const button = document.createElement('button');
+        button.innerText = word;
+        button.onclick = displayRandomImage;
+        container.appendChild(button);
+      });
+    }
+
+    function displayRandomImage() {
+      const img = document.getElementById('selectedImage');
+      const index = Math.floor(Math.random() * 15) + 1;
+      img.src = `https://www.baps.org/Data/Sites/1/Media/GalleryImages/33176/WebImages/2025_05_03_${index.toString().padStart(3, '0')}_Kanad.jpg`;
+      img.style.display = 'block';
+      img.style.opacity = 0;
+      setTimeout(() => img.style.opacity = 1, 100);
+    }
+
+    generateWordSearch();
+
+    function enableDrawing(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      let drawing = false;
+
+      canvas.addEventListener('mousedown', () => drawing = true);
+      canvas.addEventListener('mouseup', () => {
+        drawing = false;
+        ctx.beginPath();
+      });
+      canvas.addEventListener('mouseout', () => drawing = false);
+      canvas.addEventListener('mousemove', draw);
+
+      function draw(event) {
+        if (!drawing) return;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#000';
+
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(event.offsetX, event.offsetY);
+      }
+    }
+
+    ['canvas1', 'canvas2', 'canvas3'].forEach(enableDrawing);
+    generateQuestions('smrutiQuestions');
+    generateQuestions('prasangQuestions');
+    generateQuestions('shrutiQuestions');
+    generateQuestions('wordQuestions');
+
+
+
+  </script>
+</body>
+</html>
