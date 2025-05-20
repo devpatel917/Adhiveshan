@@ -28,7 +28,7 @@ Enter a world where your smrutis come alive. Here, you are presented with a smru
 * **Generate New Smrutis:** Press a button to unveil fresh smrutis.
 * **Custom Reflection Questions:** If you need a different perspective, click 'Generate New Questions' for a fresh set of prompts.
 
-![SmrutiPath Screenshot](images/smruti_words.png)
+![SmrutiPath Screenshot](images/diff_smruti.png)
 
 ### 2. Divine Connections
 
@@ -46,6 +46,8 @@ Step into the moment. Here, you read a brief passage from a **prasang** – a mo
 * **Draw Your Smruti:** Capture what it felt like to be in that divine moment.
 * **Regenerate Moments:** Click 'Generate New Prasang' for fresh insights and inspirations.
 * **Reflect and Recreate:** Answer tailored reflection questions to deepen your connection.
+
+![SmrutiPath Screenshot](images/prasangs.png)
 
 ### 4. Shruti Smruti
 
