@@ -82,7 +82,7 @@ Language is the vessel of culture and memory. In this section, you’ll be prese
 
 ## 🎯 Getting Started
 
-Ready to bring your smrutis to life? Visit **[SmrutiPath](https://smrutipath.app)** and start your journey today!
+Ready to bring your smrutis to life? Visit **[SmrutiPath](https://devpatel917.github.io/Adhiveshan/)** and start your journey today!
 
 ---
 
