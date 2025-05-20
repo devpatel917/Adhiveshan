@@ -157,6 +157,21 @@
     background-color: #5f3b2a;
     transform: scale(1.05);
 }
+button.clear-button {
+  background-color: #c4a58e;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.3s, transform 0.3s;
+}
+button.clear-button:hover {
+  background-color: #a9856f;
+  transform: scale(1.05);
+}
+
 
 </style>
 
@@ -192,6 +207,7 @@
     <p><em id="prasangText">Once, Pramukh Swami Maharaj stayed up all night writing letters despite being tired – out of his love and care for devotees.</em></p>
     <button onclick="changePrasang()">Generate New Prasang</button>
     <canvas id="canvas1" width="400" height="300"></canvas>
+    <button class="clear-button" onclick="clearCanvas('canvas1')">Clear Canvas</button>
     <div class="reflection-questions" id="prasangQuestions"></div>
     <button onclick="generateQuestions('prasangQuestions')">Generate Reflection Questions</button>
   </section>
@@ -202,6 +218,7 @@
     <p><em id="shrutiQuote">"Ā smṛuti e bhagwan ne jīv sathe jodnārī che." – Vachanamrut Gadhada II-3</em></p>
     <button onclick="generateNewShrutiQuote()">Generate New Reference</button>
     <canvas id="canvas2" width="400" height="300"></canvas>
+    <button class="clear-button" onclick="clearCanvas('canvas2')">Clear Canvas</button>
     <div class="reflection-questions" id="shrutiQuestions"></div>
     <button onclick="generateQuestions('shrutiQuestions')">Generate Reflection Questions</button>
   </section>
@@ -212,6 +229,7 @@
     <p><strong>Gujarati Word: </strong><span id="gujaratiWord">પ્રેમ</span></p>
     <button onclick="generateNewGujaratiWord()">Generate New Word</button>
     <canvas id="canvas3" width="400" height="300"></canvas>
+    <button class="clear-button" onclick="clearCanvas('canvas3')">Clear Canvas</button>
     <div class="reflection-questions" id="wordQuestions"></div>
     <button onclick="generateQuestions('wordQuestions')">Generate Reflection Questions</button>
   </section>
@@ -219,6 +237,12 @@
   
 
   <script>
+    function clearCanvas(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+ 
     const shrutiQuotes = [
       "One who has surrendered himself to God never suffers from anxiety. – Vachanamrut Gadhada I-60",
       "A person who seeks the refuge of God becomes fearless. – Vachanamrut Gadhada II-13",
